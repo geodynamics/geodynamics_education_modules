@@ -86,8 +86,8 @@ subsection Initial temperature model
   subsection Function
     set Function constants =y0=1000000, slab_dip=60, x_trench=800000.0, Ts=293, Tm=1573, age=2e15
     set Function expression = \
-      if (y0-y < tan(slab_dip*3.1416/180.)*(x_trench-x) && y0-y <= (2.32*sqrt(1.3e-6*x*6.3e8)), \
-      (Ts-Tm)*(y-y0+2.32*sqrt(1.3e-6*x*6.3e8))/(2.32*sqrt(1.3e-6*x*6.3e8)), 0) \
+      if (y0-y < tan(slab_dip*3.1416/180.)*(x_trench-x) && y0-y <= 2.32*sqrt(1.3e-6*x*6.3e8), \
+      (Ts-Tm)*(y-y0+2.32*sqrt(1.3e-6*x*6.3e8))/(2.32*sqrt(1.3e-6*max(x,1.0)*6.3e8)), 0) \
       + \
       if (x >= x_trench && y0-y <= 2.32*sqrt(1.3e-6*age), \
       (Ts-Tm)*(y-y0+2.32*sqrt(1.3e-6*age))/(2.32*sqrt(1.3e-6*age)), 0) \

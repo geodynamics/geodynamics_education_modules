@@ -1,13 +1,13 @@
 # Model to demonstrate fluid flow of a high-density weak slab 
 # surrounded by  a viscous material. Initially, gravity is switched on to
-# pull the slab down. After 10,000 years, gravity is switched
-# off, and the slab should elastically rebound to its original shape.
+# pull the slab down. After 8,000 years, gravity is switched
+# off, and the deformation of slab slows down. 
 
 # Global parameters
 set Dimension                              = 2
 set Start time                             = 0
-set End time                               = 1e4
-set Use years in output instead of seconds = true
+set End time                               = 1.5e4
+set Use years instead of seconds           = true
 set Resume computation                     = false
 set CFL number                             = 0.1
 set Maximum time step                      = 1e3

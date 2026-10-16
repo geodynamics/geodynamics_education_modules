@@ -6,11 +6,11 @@
 # Global parameters
 set Dimension                              = 2
 set Start time                             = 0
-set End time                               = 1e4
+set End time                               = 1.5e4
 set Use years instead of seconds           = true
 set Resume computation                     = auto
 set CFL number                             = 0.1
-set Maximum time step                      = 1e3
+set Maximum time step                      = 4e2
 set Use operator splitting                 = true
 set Output directory                       = elastic_deformation
 set Pressure normalization                 = no
@@ -19,7 +19,7 @@ set Nonlinear solver scheme                = iterated Advection and Stokes
 
 subsection Solver parameters
   subsection Operator splitting parameters
-    set Reaction time step                     = 1e3
+    set Reaction time step                     = 5e2
     set Reaction solver type                   = fixed step
   end
 end
@@ -118,11 +118,11 @@ subsection Material model
 
   subsection Viscoelastic
     set Densities            = 3200, 3200, 3200, 3200, 3200, 3200, 3200, 3400
-    set Viscosities          = 1.e19, 1.e19, 1.e19, 1.e19, 1.e19, 1.e19, 1.e19, 1.e21
-    set Elastic shear moduli = 1.e14, 1.e14, 1.e14, 1.e14, 1.e14, 1.e14, 1.e14, 80.e7
-    set Fixed elastic time step     = 1e3
+    set Viscosities          = 1e18, 1e18, 1e18, 1e18, 1e18, 1e18, 1e18, 1e22
+    set Elastic shear moduli = 1.e14, 1.e14, 1.e14, 1.e14, 1.e14, 1.e14, 1.e14, 40.e7
+    set Fixed elastic time step     = 4e2
     set Use fixed elastic time step = true
-    set Viscosity averaging scheme  =  arithmetic
+    set Viscosity averaging scheme  = harmonic
     set Thermal expansivities = 0
   end
 end
@@ -152,7 +152,6 @@ subsection Postprocess
 end
 
 subsection Termination criteria
-  set Termination criteria = end step
-  set End step = 500
+  set Termination criteria = end time
   set Checkpoint on termination = true
 end

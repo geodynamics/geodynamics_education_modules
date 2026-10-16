@@ -2,7 +2,7 @@
 
 set Dimension                              = 2
 set Start time                             = 0
-set End time                               = 5e6
+set End time                               = 8e6
 set CFL number                             = 1
 set Use years instead of seconds           = true
 set Output directory                       = slab
@@ -50,16 +50,7 @@ end
 subsection Mesh refinement
   set Initial adaptive refinement        = 1
   set Initial global refinement          = 3
-  set Refinement fraction                = 0.70
-  set Coarsening fraction                = 0.1
-  set Strategy                           = composition threshold
-  subsection Composition threshold
-   set Compositional field thresholds = 1e-3
-  end
-
   set Run postprocessors on initial refinement = false
-
-  set Time steps between mesh refinement = 5
 end
 
 

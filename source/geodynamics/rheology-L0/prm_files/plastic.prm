@@ -1,12 +1,12 @@
 # Model to demonstrate shear bands forming as the slab sinks. The setup is a
 # surrounded by  a viscous material. Initially, gravity is switched on to
-# pull the slab down. After 10,000 years, gravity is switched
-# off, and the slab should elastically rebound to its original shape.
+# pull the slab down. After 8,000 years, gravity is switched
+# off, and the slab shape does not change much after that.
 
 # Global parameters
 set Dimension                              = 2
 set Start time                             = 0
-set End time                               = 1e4
+set End time                               = 1.5e4
 set Use years instead of seconds           = true
 set Resume computation                     = false
 set CFL number                             = 0.1
@@ -14,7 +14,6 @@ set Maximum time step                      = 1e3
 set Output directory                       = plastic_deformation
 set Pressure normalization                 = no
 set Nonlinear solver tolerance             = 1e-4
-set Use operator splitting                 = true
 set Nonlinear solver scheme                = iterated Advection and Stokes
 
 
@@ -51,7 +50,6 @@ end
 
 subsection Formulation
   set Enable prescribed dilation = true
-  set Enable elasticity = true
 end
 
 subsection Boundary velocity model
@@ -62,9 +60,9 @@ end
 
 # Number and name of compositional fields
 subsection Compositional fields
-  set Number of fields = 4
-  set Names of fields  = ve_stress_xx, ve_stress_yy, ve_stress_xy,  slab
-  set Types of fields  = stress, stress, stress, chemical composition
+  set Number of fields = 1
+  set Names of fields  = slab
+  set Types of fields  = chemical composition
 end
 
 subsection Initial composition model
@@ -72,7 +70,7 @@ subsection Initial composition model
   subsection Function
     set Variable names      = x,y
     set Function constants  = x0=15e3,  
-    set Function expression = 0; 0; 0; if ( y>50e3 && y<150e3,  0.5+0.5*tanh((x-x0)/1000), 0 )
+    set Function expression = if ( y>50e3 && y<150e3,  0.5+0.5*tanh((x-x0)/1000), 0 )
   end
 end
 
@@ -111,13 +109,13 @@ subsection Material model
     set Viscous flow law =  dislocation
 
     set Densities                                 = 3200,  3400
-    set Prefactors for dislocation creep          = 5e-22
+    set Prefactors for dislocation creep          = 5e-23, 5e-21
     set Stress exponents for dislocation creep    = 1.0
     set Activation energies for dislocation creep = 0.0
     set Activation volumes for dislocation creep  = 0.0
 
-    set Maximum viscosity = 1.e22
-    set Minimum viscosity = 1.e17
+    set Maximum viscosity = 1.e24
+    set Minimum viscosity = 1.e19
 
     set Elastic shear moduli = 1e11
     set Fixed elastic time step     = 1e3
@@ -127,7 +125,7 @@ subsection Material model
    
     set Angles of internal friction = 30
     set Angles of dilation          = 30
-    set Cohesions                   = 10e10, 10.e5
+    set Cohesions                   = 10e10, 2e7
     set Allow negative pressures in plasticity = true
   end
 end
